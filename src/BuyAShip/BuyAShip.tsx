@@ -14,7 +14,7 @@ const BuyAShip = ({shipYardLocations, token, system, setAgentAndShipDetails}: Bu
     console.log(shipYardLocations)
   return (
     <div>
-       {shipYardLocations?.map((location) => <ShipCard setAgentAndShipDetails={setAgentAndShipDetails} system={system} token={token} location={location}/>)}
+       {shipYardLocations?.map((location, i) => <ShipCard key={i} setAgentAndShipDetails={setAgentAndShipDetails} system={system} token={token} location={location}/>)}
     </div>
   )
 }

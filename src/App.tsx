@@ -14,9 +14,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const [token, setToken] = useState<string>(
-    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiTU9MTFlURVNUIiwidmVyc2lvbiI6InYyLjIuMCIsInJlc2V0X2RhdGUiOiIyMDI0LTA5LTAxIiwiaWF0IjoxNzI3MDc5MjQxLCJzdWIiOiJhZ2VudC10b2tlbiJ9.naY6mPAdQUsoek3Swh6fdNnLu5OKMORTSbvxUXc3ktNkNfVmVha-5b6tI-_6zxkXX-0mV5ae14juhmiKXM4vFjfjLA_oFbGr2D0W7Ia-TSpF7r1AdZEjO6dywh8omL5TDKq67EkhvOFukOTC0jbE6yY6YVA7svoOy3fBvlq3DMddjNBCwA56hRkXFI9lkB_C6chgJGE49LJbkdwqH0YaVgvX04H0QM1EGo7HHKhyttYUSBYMGTC05dQoMO4etUwlb3Uh5WA91RgX7R-mFVVF4f3038_BU-l6p_MO16flcifYx9YVGy6AXYacRday0w8T7p15BMvyQtVGOBFd5r-ZyA"
-  );
+  const [token, setToken] = useState<string>( "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiTU9MTFlURVNUMiIsInZlcnNpb24iOiJ2Mi4yLjAiLCJyZXNldF9kYXRlIjoiMjAyNC0wOS0wMSIsImlhdCI6MTcyNzEwNjkwMSwic3ViIjoiYWdlbnQtdG9rZW4ifQ.ACbjx1eeP4bfevcdysQ2_HrFtoHI6rllfu1WzWdcwfKv4h9r9-JkpqeAlDWdoxQkM557TkUAUWnWL8JnOOjA5MscBj5OUhUfNpxm78kmSzPlK5_AzN8bWplje2ImzmoGqXK7NUZFCSgzSv8dz9I__NpVDCQtOKw7UeV1-Dt2P_whzJk8RWDufyXIglZthAXAxByI9jlSmliEzUuSWvGJnc0lrHvzhi4XPwdKEfw2ure8xrRyCpt-728lDB5mr2ovymr_EmD3aYfn-NfADkTsXULfzmnrWdbT_D-XKdwgSY3QcCBZXmuM-Vx6mvq6QfbSeEA2p5wfry-h7VMfJZsJiQ" );
   const [resp, setResp] = useState("");
   const [form, setForm] = useState({ symbol: "", faction: "COSMIC" });
   const [agentDetails, setAgentDetails] = useState<AgentDetails>();
