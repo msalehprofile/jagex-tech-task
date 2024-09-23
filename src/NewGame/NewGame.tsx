@@ -8,7 +8,7 @@ import { NewGameForm } from "../DataTypes/DataTypes";
 
 type NewGameProps = {
   resp: string;
-  token: undefined;
+  token: string;
   registerAgent: () => void;
   handleSetForm: (event: FormEvent<HTMLInputElement>, key: string) => void;
   form: NewGameForm;
