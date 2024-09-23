@@ -1,4 +1,6 @@
+import AcceptContract from "./AcceptContract/AcceptContract";
 import "./App.css";
+import BuyAShip from "./BuyAShip/BuyAShip";
 import {
   AgentContract,
   AgentDetails,
@@ -93,9 +95,10 @@ function App() {
     });
 
     const agentContractData = await resp.json();
+    console.log("agent contract data: ", agentContractData);
 
     if (resp.ok) {
-      setAgentContract(agentContractData);
+      setAgentContract(agentContractData.data[0]);
     }
     console.log("agent contract: ", agentContract);
   };
@@ -111,22 +114,31 @@ function App() {
 
   return (
     <>
-      
-        <h1>STQS</h1>
-        <Routes>
-          <Route path="/"
-            element =
-            {
-              <NewGame
-                resp={resp}
-                form={form}
-                token={token}
-                registerAgent={registerAgent}
-                handleSetForm={handleSetForm}
-              />
-            }
-          />
-        </Routes>
+      <h1>STQS</h1>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <NewGame
+              resp={resp}
+              form={form}
+              token={token}
+              registerAgent={registerAgent}
+              handleSetForm={handleSetForm}
+            />
+          }
+        />
+        <Route
+          path="/acceptcontract"
+          element={
+            <AcceptContract
+              token={token}
+              agentContract={agentContract ? agentContract : undefined}
+            />
+          }
+        />
+        <Route path="/buyaship" element={<BuyAShip />} />
+      </Routes>
     </>
   );
 }
