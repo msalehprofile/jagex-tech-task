@@ -16,10 +16,10 @@ const ShipButton = ({ ship, location, token, setShipInThisLocation, setAgentAndS
 
   const selectChosenShip = async() => {
     console.log("chosen", ship.type, location?.symbol);
-    
+
     if (location != undefined) {
         console.log(ship.type)
-        console.log( location.symbol)
+        console.log(location.symbol)
         const resp = await fetch("https://api.spacetraders.io/v2/my/ships", {
           method: "POST",
           headers: {
@@ -33,7 +33,7 @@ const ShipButton = ({ ship, location, token, setShipInThisLocation, setAgentAndS
         });
   
         const selectedShipData = await resp.json();
-  
+        console.log(selectedShipData)
         if (resp.ok) {
           setAgentAndShipDetails(selectedShipData)
           console.log("selected ship" , selectedShipData)
@@ -44,7 +44,6 @@ const ShipButton = ({ ship, location, token, setShipInThisLocation, setAgentAndS
       }
       
   };
-  selectChosenShip()
   
   return (
     <div>
