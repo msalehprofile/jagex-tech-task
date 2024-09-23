@@ -50,3 +50,29 @@ export type AgentContract = {
     expiration: string;
     deadlineToAccept: string;
 }
+
+export type ShipyardLocations = {
+    systemSymbol: string;
+    symbol: string;
+    type: string;
+    x: number;
+    y: number;
+    orbitals: [],
+    traits: [
+    {
+        symbol: string;
+        name: string;
+        description: string;
+    },
+    ],
+    modifiers: [    ],
+    chart: {
+        submittedBy: string;
+        submittedOn: string;
+    },
+    faction: {
+        symbol: string
+    },
+    orbits: string;
+    isUnderConstruction: boolean
+}

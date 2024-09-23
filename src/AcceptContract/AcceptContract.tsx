@@ -1,76 +1,78 @@
 import { useState } from "react";
 import { AgentContract } from "../DataTypes/DataTypes";
 import "./AcceptContract.scss";
+import { useNavigate } from "react-router-dom";
 
 type AcceptContractProps = {
   agentContract: AgentContract | undefined;
   token: string;
+  findAShipyard: () => void;
 };
 
-const AcceptContract = ({ agentContract, token }: AcceptContractProps) => {
+const AcceptContract = ({ agentContract, token, findAShipyard }: AcceptContractProps) => {
   const today = new Date();
   const todayDate = today.getDate();
   const todayMonth = today.getMonth();
   const todayYear = today.getFullYear();
-  const [passedDeadline, setPassedDeadline] = useState<boolean>(false)
-
+  const [passedDeadline, setPassedDeadline] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const validateAcceptance = () => {
-    const refactoredAgentContractAcceptanceDeadline =  agentContract ? agentContract.terms.deadline.slice(0, 10).split("-").join(''): ""
+    const refactoredAgentContractAcceptanceDeadline = agentContract
+      ? agentContract.terms.deadline.slice(0, 10).split("-").join("")
+      : "";
     let todayDateToUse = String(todayDate);
     let todayMonthToUse = String(todayMonth);
 
-    console.log(todayMonth)
-    if(todayDate < 10) {
-        todayDateToUse = String("0" + todayDate)
+    console.log(todayMonth);
+    if (todayDate < 10) {
+      todayDateToUse = String("0" + todayDate);
     }
 
-    if(todayMonth < 10) {
-        todayMonthToUse = String("0" + todayMonth);
-        console.log(todayMonthToUse)
+    if (todayMonth < 10) {
+      todayMonthToUse = String("0" + todayMonth);
+      console.log(todayMonthToUse);
     }
-    
-    const refactoredCurrentDate = todayYear + todayMonthToUse + todayDateToUse
 
-    if(Number(refactoredAgentContractAcceptanceDeadline) > Number(refactoredCurrentDate)) {
-        console.log("yay")
-        setPassedDeadline(false)
-        acceptAgentsContract()
-        
+    const refactoredCurrentDate = todayYear + todayMonthToUse + todayDateToUse;
+
+    if (
+      Number(refactoredAgentContractAcceptanceDeadline) >
+      Number(refactoredCurrentDate)
+    ) {
+      console.log("yay");
+      setPassedDeadline(false);
+      acceptAgentsContract();
     } else {
-        setPassedDeadline(true)
+      setPassedDeadline(true);
     }
-
   };
 
   const acceptAgentsContract = async () => {
-    console.log(agentContract?.id)
-    console.log(token)
-    if ( agentContract != undefined) {
-        const resp = await fetch(`https://api.spacetraders.io/v2/my/contracts/${agentContract.id}/accept`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
+    console.log(agentContract?.id);
+    console.log(token);
+    if (agentContract != undefined) {
+      const resp = await fetch(
+        `https://api.spacetraders.io/v2/my/contracts/${agentContract.id}/accept`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-          const json = await resp.json();
-
-          if (resp.ok) {
-            console.log("data" , json)
-          }
+      if (resp.ok) {
+        navigate("/buyaship");
+        findAShipyard()
+      }
     }
-   
-  
-
-    
   };
-
 
   return (
     <>
-      <h1>Agent would you like to accept this contract?</h1>
+      <h1>Agent, would you like to accept this contract?</h1>
       <p>Type of contract: {agentContract ? agentContract.type : ""}</p>
       <p>
         Your task is to collect{" "}
@@ -87,7 +89,9 @@ const AcceptContract = ({ agentContract, token }: AcceptContractProps) => {
       </p>
       <button onClick={validateAcceptance}>Yes</button>
       <button>No</button>
-      {passedDeadline && <p>Sorry, the deadline to accept this contract has passed</p>}
+      {passedDeadline && (
+        <p>Sorry, the deadline to accept this contract has passed</p>
+      )}
     </>
   );
 };

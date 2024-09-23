@@ -5,6 +5,7 @@ import {
   AgentContract,
   AgentDetails,
   AgentWaypointLocation,
+  ShipyardLocations,
 } from "./DataTypes/DataTypes";
 import NewGame from "./NewGame/NewGame";
 import { FormEvent, useEffect, useState } from "react";
@@ -20,7 +21,10 @@ function App() {
   const [startingWaypoint, setStartingWaypoint] =
     useState<AgentWaypointLocation>();
   const [agentContract, setAgentContract] = useState<AgentContract>();
+  const [ system, setSystem] = useState<string>()
+  const [ shipYardLocations, setShipYardLocations] =  useState<ShipyardLocations[]>()
 
+  // Creating user and setting contract
   const registerAgent = async () => {
     const resp = await fetch("https://api.spacetraders.io/v2/register", {
       method: "POST",
@@ -66,7 +70,8 @@ function App() {
   const getStartingWaypoint = async () => {
     if (agentDetails != undefined) {
       const splitHQ = agentDetails.headquarters.split("-");
-      const system = splitHQ[0] + "-" + splitHQ[1];
+      // const system = splitHQ[0] + "-" + splitHQ[1];
+      setSystem(splitHQ[0] + "-" + splitHQ[1])
 
       const resp = await fetch(
         `https://api.spacetraders.io/v2/systems/${system}/waypoints/${agentDetails.headquarters}`,
@@ -86,7 +91,7 @@ function App() {
     console.log("starting waypoint:", startingWaypoint);
   };
 
-  const viewContract = async () => {
+  const getAgentContract = async () => {
     const resp = await fetch("https://api.spacetraders.io/v2/my/contracts", {
       headers: {
         "Content-Type": "application/json",
@@ -103,13 +108,34 @@ function App() {
     console.log("agent contract: ", agentContract);
   };
 
+  // Buying a ship
+
+  const findAShipyard = async() => {
+    console.log(system)
+    const resp = await fetch(`https://api.spacetraders.io/v2/systems/${system}/waypoints?traits=SHIPYARD`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const shipyardData = await resp.json();
+    console.log("shipyard: ", shipyardData);
+
+    if (resp.ok) {
+      setShipYardLocations(shipyardData.data);
+    }
+    console.log("shipyard locations: ", shipYardLocations);
+  }
+
   useEffect(() => {
     getAgentDetails();
   }, []);
 
   useEffect(() => {
     getStartingWaypoint();
-    viewContract();
+    getAgentContract();
+    findAShipyard();
   }, [agentDetails]);
 
   return (
@@ -134,10 +160,11 @@ function App() {
             <AcceptContract
               token={token}
               agentContract={agentContract ? agentContract : undefined}
+              findAShipyard={findAShipyard}
             />
           }
         />
-        <Route path="/buyaship" element={<BuyAShip />} />
+        <Route path="/buyaship" element={<BuyAShip token={token} system={system} shipYardLocations={shipYardLocations}/>} />
       </Routes>
     </>
   );

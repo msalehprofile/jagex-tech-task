@@ -1,0 +1,9 @@
+.shipcard {
+    border: 1px solid black;
+    margin: 20px;
+    padding: 30px;
+
+    &__traits {
+        font-weight: bold;
+    }
+ }
