@@ -3,6 +3,16 @@ export type NewGameForm = {
   faction: string;
 };
 
+export type Response = {
+  error: {
+    code: number;
+    data: {
+      agentSymbol: string;
+    };
+    message: string;
+  };
+};
+
 export type AgentDetails = {
   accountID: string;
   symbol: string;

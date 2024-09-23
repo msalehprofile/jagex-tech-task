@@ -38,8 +38,9 @@ const ShipCard = ({ location, token, system, setAgentAndShipDetails }: ShipCardP
 
       if (resp.ok) {
         setAvailableShips(availableShipsData.data);
+        console.log("avail ships: ", availableShips?.shipTypes);
       }
-      console.log("avail ships: ", availableShips);
+      console.log("avail ships: ", availableShips?.shipTypes);
     }
   };
 
