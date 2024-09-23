@@ -1,3 +1,4 @@
+import "./NewGame.scss";
 import { useState, FormEvent } from "react";
 import { NewGameForm } from "../DataTypes/DataTypes";
 
@@ -7,11 +8,12 @@ import { NewGameForm } from "../DataTypes/DataTypes";
  */
 
 type NewGameProps = {
-  resp: string;
+  resp: string | undefined;
   token: string;
   registerAgent: () => void;
   handleSetForm: (event: FormEvent<HTMLInputElement>, key: string) => void;
   form: NewGameForm;
+  signUpError: boolean
 };
 
 function NewGame({
@@ -19,25 +21,37 @@ function NewGame({
   resp,
   registerAgent,
   handleSetForm,
+  signUpError,
   form,
 }: NewGameProps) {
   return (
-    <>
-      <h1>New Game</h1>
+    <div className="newGame">
+      <h1 className="newGame__title">Create a new game!</h1>
+      <div className="newGame__inputs">
+        <p>Your name:</p>
+        <input
+          className="newGame__inputs--entry"
+          name="symbol"
+          value={form.symbol}
+          onChange={(event) => handleSetForm(event, "symbol")}
+        />
+        <p>Your faction:</p>
+        <input
+          className="newGame__inputs--entry"
+          name="faction"
+          value={form.faction}
+          onChange={(event) => handleSetForm(event, "faction")}
+        />
+      </div>
       <input
-        name="symbol"
-        value={form.symbol}
-        onChange={(event) => handleSetForm(event, "symbol")}
+        className="newGame__button"
+        type="submit"
+        onClick={registerAgent}
       />
-      <input
-        name="faction"
-        value={form.faction}
-        onChange={(event) => handleSetForm(event, "faction")}
-      />
-      <input type="submit" onClick={registerAgent} />
-      <pre>API token: {token}</pre>
-      <pre>Response: {resp}</pre>
-    </>
+      {/* <pre>API token: {token}</pre> */}
+      {signUpError && <p  className="newGame__error"> {resp}</p>}
+      
+    </div>
   );
 }
 
