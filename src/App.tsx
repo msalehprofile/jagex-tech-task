@@ -2,9 +2,11 @@ import AcceptContract from "./AcceptContract/AcceptContract";
 import "./App.css";
 import BuyAShip from "./BuyAShip/BuyAShip";
 import {
+  AgentAndShipDetails,
   AgentContract,
   AgentDetails,
   AgentWaypointLocation,
+  AvailableShips,
   ShipyardLocations,
 } from "./DataTypes/DataTypes";
 import NewGame from "./NewGame/NewGame";
@@ -23,7 +25,10 @@ function App() {
   const [agentContract, setAgentContract] = useState<AgentContract>();
   const [ system, setSystem] = useState<string>()
   const [ shipYardLocations, setShipYardLocations] =  useState<ShipyardLocations[]>()
-
+  const [availableShipsToBuy, setAvailableShipsToBuy] = useState<AvailableShips>()
+  const [chosenShipYaardLocation, setChosenShipYaardLocation] = useState<AvailableShips>()
+  const [agentAndShipDetails, setAgentAndShipDetails] = useState<AgentAndShipDetails>()
+  
   // Creating user and setting contract
   const registerAgent = async () => {
     const resp = await fetch("https://api.spacetraders.io/v2/register", {
@@ -128,6 +133,8 @@ function App() {
     console.log("shipyard locations: ", shipYardLocations);
   }
 
+  console.log(agentAndShipDetails)
+
   useEffect(() => {
     getAgentDetails();
   }, []);
@@ -164,7 +171,7 @@ function App() {
             />
           }
         />
-        <Route path="/buyaship" element={<BuyAShip token={token} system={system} shipYardLocations={shipYardLocations}/>} />
+        <Route path="/buyaship" element={<BuyAShip setAgentAndShipDetails={setAgentAndShipDetails} token={token} system={system} shipYardLocations={shipYardLocations}/>} />
       </Routes>
     </>
   );
