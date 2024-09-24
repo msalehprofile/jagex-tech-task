@@ -16,9 +16,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 function App() {
-  const [token, setToken] = useState<string>(
-    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiR0FNRUFDQ09VTlQiLCJ2ZXJzaW9uIjoidjIuMi4wIiwicmVzZXRfZGF0ZSI6IjIwMjQtMDktMDEiLCJpYXQiOjE3MjcxMDkwNTQsInN1YiI6ImFnZW50LXRva2VuIn0.naQVVUvVLf5JzcOHFa6JojAUimB5x0edyDnf2MhV5bp5fr5NIenA1uUAyTJFXmOzET53nf4ZFqH6WsuTm0Ob-OVo_pXMG7bvu_tglsUSUe2TBLVIO0r8c2tHQW3xagKaJVCaRwiYOqP465F2d_CLvVE5wof5EPLkEofgNgUlvBCZOPvHinsrDjAm1TLPfNxI4bT3NMnTwXNWrs4KWb9kYsGN-86RJK_ZF0Yu7-rCC9OTNqDxUesU00dXgn-WILK3jcWJOlo73u1p1TbeM_DSxgWfSyvOPRRzSYrVgdkvNpHx9CXILoXq77r8xc3hOzZobV122d_WACfufsyo4dxlSw"
-  );
+  const [token, setToken] = useState<string>("");
   const [resp, setResp] = useState<string>("");
   // const [errResp, setErrResp] = useState<Response>();
   const [form, setForm] = useState({ symbol: "", faction: "COSMIC" });
@@ -52,17 +50,17 @@ function App() {
     });
 
     const json = await resp.json();
-    
-    console.log(json)
+
+    console.log(json);
 
     if (resp.ok) {
-      console.log("success")
+      console.log("success");
       setToken(json.data.token);
       setSignUpError(false);
-      navigate('/acceptcontract')
-      
+      getAgentDetails()
+      navigate("/acceptcontract");
     } else {
-      const errorMessage = String(json.error.message)
+      const errorMessage = String(json.error.message);
       setResp(errorMessage);
       setSignUpError(true);
       console.log(resp);
@@ -160,7 +158,7 @@ function App() {
 
   useEffect(() => {
     getAgentDetails();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     getStartingWaypoint();

@@ -7,9 +7,11 @@ type ShipButtonProps = {
   location: ShipyardLocations | undefined;
   token: string;
   setShipInThisLocation: Dispatch<SetStateAction<boolean>>
+  setSuccessfullyBoughtShip: Dispatch<SetStateAction<boolean>>
   setAgentAndShipDetails: Dispatch<SetStateAction<AgentAndShipDetails | undefined>>
+
 };
-const ShipButton = ({ ship, location, token, setShipInThisLocation, setAgentAndShipDetails }: ShipButtonProps) => {
+const ShipButton = ({ setSuccessfullyBoughtShip, ship, location, token, setShipInThisLocation, setAgentAndShipDetails }: ShipButtonProps) => {
   const splitShipType = ship.type.split("_");
   const connectedShipName = splitShipType.join(" ");
     console.log(connectedShipName);
@@ -33,11 +35,13 @@ const ShipButton = ({ ship, location, token, setShipInThisLocation, setAgentAndS
         });
   
         const selectedShipData = await resp.json();
-        console.log(selectedShipData)
+        console.log("hello", selectedShipData)
         if (resp.ok) {
           setAgentAndShipDetails(selectedShipData)
+          setSuccessfullyBoughtShip(true)
           console.log("selected ship" , selectedShipData)
           setShipInThisLocation(true)
+          console.log(resp)
         } else {
             setShipInThisLocation(false)
         }
