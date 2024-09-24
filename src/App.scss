@@ -44,7 +44,9 @@ button {
   background-color: $logo-color;
   width: 100%;
   text-align: center;
-  padding-top: 4vh;
-  height: 12vh;
+  height: 10vh;
   font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
