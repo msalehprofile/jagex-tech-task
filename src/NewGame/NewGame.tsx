@@ -1,5 +1,5 @@
 import "./NewGame.scss";
-import { useState, FormEvent } from "react";
+import { FormEvent } from "react";
 import { NewGameForm } from "../DataTypes/DataTypes";
 
 /**
@@ -17,7 +17,6 @@ type NewGameProps = {
 };
 
 function NewGame({
-  token,
   resp,
   registerAgent,
   handleSetForm,
@@ -48,7 +47,6 @@ function NewGame({
         type="submit"
         onClick={registerAgent}
       />
-      {/* <pre>API token: {token}</pre> */}
       {signUpError && <p  className="newGame__error"> {resp}</p>}
       
     </div>
