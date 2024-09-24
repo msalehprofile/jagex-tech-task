@@ -46,8 +46,8 @@ const ShipButton = ({ ship, location, token, setShipInThisLocation, setAgentAndS
   };
   
   return (
-    <div>
-      <button onClick={selectChosenShip}>{connectedShipName}</button>
+    <div className="ship-selection-button">
+      <button className="ship-selection-button__option"onClick={selectChosenShip}>{connectedShipName}</button>
     </div>
   );
 };
