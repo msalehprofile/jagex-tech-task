@@ -1,0 +1,16 @@
+@use "src/Variables.scss" as *;
+
+.ship-selection-button {
+  margin: 10px;
+  background-color: $card-background-color;
+  display: flex;
+  justify-content: center;
+
+  &__option {
+    background-color: $logo-color;
+
+    &:hover {
+      border-color: darken($logo-color, 20%);
+    }
+  }
+}

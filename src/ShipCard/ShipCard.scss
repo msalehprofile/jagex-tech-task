@@ -1,9 +1,54 @@
-.shipyard {
-    border: 1px solid black;
-    margin: 20px;
-    padding: 30px;
+@use "src/Variables.scss" as *;
 
-    &__traits {
-        font-weight: bold;
+.shipyard-card {
+  background-color: $card-background-color;
+  border: 1px solid $light-black-color;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 10px;
+
+  &__type {
+    background-color: $card-background-color;
+    color: $light-black-color;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  &__button {
+    margin: 10px;
+    
+  }
+
+  &__traits {
+    background-color: $logo-color;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+
+    &--bold {
+        background-color: $logo-color;
+      font-weight: bold;
     }
- }
+
+    &--heading {
+        color: $light-black-color;
+        font-weight: bold;
+        font-size: 20px;
+        background-color: $logo-color;
+      }
+
+      .traits__trait {
+        background-color: $logo-color;
+        padding-bottom: 10px;
+        color: $light-black-color;
+
+        &--bold {
+            color: $light-black-color;
+            background-color: $logo-color;
+            font-weight: bold;
+        }
+      }
+  }
+}
