@@ -34,6 +34,11 @@
     .form__details {
       line-height: 2;
       background-color: $card-background-color;
+
+      &--bold {
+        background-color: $card-background-color;
+        font-weight: bold;
+      }
     }
   }
 }
