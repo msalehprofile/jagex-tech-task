@@ -1,18 +1,20 @@
 import { useState } from "react";
 import "./AcceptContract.scss";
-import { AgentContract } from "../DataTypes/DataTypes";
+import { AgentContract, AgentDetails } from "../DataTypes/DataTypes";
 import { useNavigate } from "react-router-dom";
 
 type AcceptContractProps = {
   agentContract: AgentContract | undefined;
   token: string;
-  findAShipyard: () => void;
-};
+  system: string | undefined;
+  agentDetails: AgentDetails | undefined;
+ };
 
 const AcceptContract = ({
   agentContract,
   token,
-  findAShipyard,
+  system,
+  agentDetails
 }: AcceptContractProps) => {
   const today = new Date();
   const todayDate = today.getDate();
@@ -73,7 +75,8 @@ const AcceptContract = ({
 
       if (resp.ok) {
         navigate("/buyaship");
-        findAShipyard();
+    
+        
       }
     }
   };

@@ -57,7 +57,6 @@ function App() {
       console.log("success");
       setToken(json.data.token);
       setSignUpError(false);
-      getAgentDetails()
       navigate("/acceptcontract");
     } else {
       const errorMessage = String(json.error.message);
@@ -85,6 +84,7 @@ function App() {
 
     if (resp.ok) {
       setAgentDetails(agentData.data);
+      
     }
 
     console.log("agent details", agentDetails);
@@ -92,10 +92,10 @@ function App() {
 
   const getStartingWaypoint = async () => {
     if (agentDetails != undefined) {
-      const splitHQ = agentDetails.headquarters.split("-");
-      // const system = splitHQ[0] + "-" + splitHQ[1];
-      setSystem(splitHQ[0] + "-" + splitHQ[1]);
-
+      // const splitHQ = agentDetails.headquarters.split("-");
+      // setSystem(splitHQ[0] + "-" + splitHQ[1]);
+      console.log(system);
+      console.log("ah");
       const resp = await fetch(
         `https://api.spacetraders.io/v2/systems/${system}/waypoints/${agentDetails.headquarters}`,
         {
@@ -134,7 +134,7 @@ function App() {
   // Buying a ship
 
   const findAShipyard = async () => {
-    console.log(system);
+    console.log("system2", system);
     const resp = await fetch(
       `https://api.spacetraders.io/v2/systems/${system}/waypoints?traits=SHIPYARD`,
       {
@@ -157,14 +157,33 @@ function App() {
   console.log(agentAndShipDetails);
 
   useEffect(() => {
-    getAgentDetails();
+    if (token != "") {
+      getAgentDetails();
+    }
   }, [token]);
 
   useEffect(() => {
-    getStartingWaypoint();
-    getAgentContract();
-    findAShipyard();
+    if (agentDetails != undefined) {
+      getAgentContract();
+      const splitHQ = agentDetails.headquarters.split("-");
+      setSystem(splitHQ[0] + "-" + splitHQ[1]);
+    }
   }, [agentDetails]);
+
+  useEffect(() => {
+    console.log("system", agentDetails);
+    if (agentDetails != undefined && system != undefined) {
+
+      getStartingWaypoint();
+      findAShipyard();
+    }
+    console.log("system", system);
+    // if (system != undefined && agentDetails != undefined) {
+    //   console.log("good conditions")
+    //   getStartingWaypoint();
+    //   findAShipyard();
+    // }
+  }, [agentContract]);
 
   return (
     <>
@@ -189,7 +208,8 @@ function App() {
             <AcceptContract
               token={token}
               agentContract={agentContract ? agentContract : undefined}
-              findAShipyard={findAShipyard}
+              system={system}
+              agentDetails={agentDetails}
             />
           }
         />
