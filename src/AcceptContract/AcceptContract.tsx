@@ -113,7 +113,7 @@ const AcceptContract = ({
           <button onClick={navigateToHomePage}className="acceptcontract__response--button">No</button>
         </div>
         {passedDeadline && (
-          <p>Sorry, the deadline to accept this contract has passed</p>
+          <p className="acceptcontract__response--error">Sorry, the deadline to accept this contract has passed</p>
         )}
       </div>
     </div>
