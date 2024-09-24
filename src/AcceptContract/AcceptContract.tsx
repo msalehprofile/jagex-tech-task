@@ -20,7 +20,7 @@ const AcceptContract = ({
   const todayYear = today.getFullYear();
   const [passedDeadline, setPassedDeadline] = useState<boolean>(false);
   const navigate = useNavigate();
-  const itemToCollect = agentContract
+  const itemToCollect: string = agentContract
     ? agentContract.terms.deliver[0].tradeSymbol.replace("_", " ")
     : "";
 
@@ -28,8 +28,8 @@ const AcceptContract = ({
     const refactoredAgentContractAcceptanceDeadline = agentContract
       ? agentContract.terms.deadline.slice(0, 10).split("-").join("")
       : "";
-    let todayDateToUse = String(todayDate);
-    let todayMonthToUse = String(todayMonth);
+    let todayDateToUse: string = String(todayDate);
+    let todayMonthToUse: string = String(todayMonth);
 
     if (todayDate < 10) {
       todayDateToUse = String("0" + todayDate);
@@ -39,7 +39,7 @@ const AcceptContract = ({
       todayMonthToUse = String("0" + todayMonth);
     }
 
-    const refactoredCurrentDate = todayYear + todayMonthToUse + todayDateToUse;
+    const refactoredCurrentDate: string = todayYear + todayMonthToUse + todayDateToUse;
 
     if (
       Number(refactoredAgentContractAcceptanceDeadline) >
