@@ -14,6 +14,7 @@ const BuyAShip = ({shipYardLocations, token, system, setAgentAndShipDetails}: Bu
     console.log(shipYardLocations)
   return (
     <div>
+      <h1 className="find-shipyard-heading">Find a Ship Yard</h1>
        {shipYardLocations?.map((location, i) => <ShipCard key={i} setAgentAndShipDetails={setAgentAndShipDetails} system={system} token={token} location={location}/>)}
     </div>
   )
