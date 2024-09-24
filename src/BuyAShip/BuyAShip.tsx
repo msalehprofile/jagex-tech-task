@@ -11,7 +11,7 @@ type BuyAShipProps = {
 }
 
 const BuyAShip = ({shipYardLocations, token, system, setAgentAndShipDetails}: BuyAShipProps) => {
-    console.log(shipYardLocations)
+
   return (
     <div>
       <h1 className="find-shipyard-heading">Find a Ship Yard</h1>

@@ -13,8 +13,6 @@ type AcceptContractProps = {
 const AcceptContract = ({
   agentContract,
   token,
-  system,
-  agentDetails
 }: AcceptContractProps) => {
   const today = new Date();
   const todayDate = today.getDate();
@@ -33,14 +31,12 @@ const AcceptContract = ({
     let todayDateToUse = String(todayDate);
     let todayMonthToUse = String(todayMonth);
 
-    console.log(todayMonth);
     if (todayDate < 10) {
       todayDateToUse = String("0" + todayDate);
     }
 
     if (todayMonth < 10) {
       todayMonthToUse = String("0" + todayMonth);
-      console.log(todayMonthToUse);
     }
 
     const refactoredCurrentDate = todayYear + todayMonthToUse + todayDateToUse;
@@ -49,7 +45,6 @@ const AcceptContract = ({
       Number(refactoredAgentContractAcceptanceDeadline) >
       Number(refactoredCurrentDate)
     ) {
-      console.log("yay");
       setPassedDeadline(false);
       acceptAgentsContract();
     } else {
@@ -58,8 +53,6 @@ const AcceptContract = ({
   };
 
   const acceptAgentsContract = async () => {
-    console.log(agentContract?.id);
-    console.log(token);
     if (agentContract != undefined) {
       const resp = await fetch(
         `https://api.spacetraders.io/v2/my/contracts/${agentContract.id}/accept`,
@@ -71,12 +64,9 @@ const AcceptContract = ({
           },
         }
       );
-      console.log(resp)
 
       if (resp.ok) {
         navigate("/buyaship");
-    
-        
       }
     }
   };

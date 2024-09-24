@@ -1,7 +1,5 @@
 import {
   Dispatch,
-  EventHandler,
-  MouseEventHandler,
   SetStateAction,
   useState,
 } from "react";
@@ -35,12 +33,11 @@ const ShipCard = ({
 
   const viewAvailableShips = () => {
     setViewShipButton(false);
-    console.log(location?.symbol);
     findAllAvailableShips();
   };
 
   const findAllAvailableShips = async () => {
-    console.log(system);
+
     if (location != undefined) {
       const resp = await fetch(
         `https://api.spacetraders.io/v2/systems/${system}/waypoints/${location.symbol}/shipyard`,
@@ -52,13 +49,10 @@ const ShipCard = ({
         }
       );
       const availableShipsData = await resp.json();
-      console.log("shipyard: ", availableShipsData);
 
       if (resp.ok) {
         setAvailableShips(availableShipsData.data);
-        console.log("avail ships: ", availableShips?.shipTypes);
       }
-      console.log("avail ships: ", availableShips?.shipTypes);
     }
   };
 
@@ -66,8 +60,6 @@ const ShipCard = ({
     setViewShipButton(true);
     setShipInThisLocation(true);
   };
-
-  console.log(location);
 
   return (
     <div className="shipyard-card">
