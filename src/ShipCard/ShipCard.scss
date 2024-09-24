@@ -21,6 +21,13 @@
     
   }
 
+  &__message {
+    margin: 15px;
+    background-color: $card-background-color;
+    color: $light-black-color;
+    font-weight: 600;
+  }
+
   &__traits {
     background-color: $logo-color;
     border-radius: 10px;

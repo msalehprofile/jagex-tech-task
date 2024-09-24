@@ -31,6 +31,7 @@ const ShipCard = ({
   const [viewShipButton, setViewShipButton] = useState<boolean>(true);
   const [availableShips, setAvailableShips] = useState<AvailableShips>();
   const [shipInThisLocation, setShipInThisLocation] = useState<boolean>(true);
+  const [successfullyBoughtShip, setSuccessfullyBoughtShip] = useState<boolean>(false);
 
   const viewAvailableShips = () => {
     setViewShipButton(false);
@@ -92,16 +93,22 @@ const ShipCard = ({
           <ShipButton
             setAgentAndShipDetails={setAgentAndShipDetails}
             setShipInThisLocation={setShipInThisLocation}
+            setSuccessfullyBoughtShip={setSuccessfullyBoughtShip}
             token={token}
             location={location}
             ship={ship}
+            key={ship.type}
           />
         ))}
       {!viewShipButton && <button className="shipyard-card__button" onClick={goBack}>Return</button>}
       {!shipInThisLocation && (
-        <p>
-          Sorry, you must have another ship present at this location to purchase
-          this ship
+        <p className="shipyard-card__message">
+          Sorry, you cannot buy this ship!
+        </p>
+      )}
+      {successfullyBoughtShip && (
+        <p className="shipyard-card__message">
+          You have bought this ship!
         </p>
       )}
     </div>

@@ -69,6 +69,7 @@ const AcceptContract = ({
           },
         }
       );
+      console.log(resp)
 
       if (resp.ok) {
         navigate("/buyaship");
