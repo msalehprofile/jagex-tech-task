@@ -13,7 +13,7 @@ When you first open the site, you are shown a sign-up page where users can enter
 
 When the user creates a unique username, they are taken to a "Accept contract" page. Here, they are asked whether they would like to accept a contract, and requirements of contract are detailed. These include the type of contract, how many units they need to collect, what items to collect and the deadline. If the current date is later than the deadline, the user cannot accept the contract. If the user clicks "No" they are taken back to the sign-up page.
 
-After successfully accepting a contract, users are directed to a pate which shows the available shipyeards, along with the traits of each location. There is a "View all ships" button at the bottom of each Shipyard card. When clicked, the available ships to buy are displayed. The user can then buy a ship, provided they meet the required conditions, such as having enough money. If the conditions are not met, an error message saying 'Sorry, you cannot buy this ship!' will show. If they are able to buy the ship a message saying 'You have bought this ship!' will show. 
+After successfully accepting a contract, users are directed to a pate which shows the available shipyeards, along with the traits of each location. There is a "View all ships" button at the bottom of each Shipyard card. When clicked, the available ships to buy are displayed. The user can then buy a ship, provided they meet the required conditions, such as having enough money. If the conditions are not met, an error message saying "Sorry, you cannot buy this ship!" will show. If they are able to buy the ship a message saying "You have bought this ship!" will show. 
 
 ## What I would do next
 If I had more time, I would work on the remaining features, such as enabling users to mine astroids, sell cargo and deliver the goods.
@@ -21,6 +21,9 @@ If I had more time, I would work on the remaining features, such as enabling use
 I would also want to add an agent data box in the corner of the page. This would display the agent's name along with their credits which would update as they spend or earn money.
 
 Finally, I would add testing for the compenents which I have created.
+
+## What I would do differently
+If I were to start this challenge again I would spend more time planning the full scope of the project. As part of this I would use TDD, writing tests first and then implementing the code to pass those tests.
 
 ## Running
 `npm run dev`
