@@ -78,7 +78,7 @@ const ShipCard = ({
         {!viewShipButton && <p className="shipyard-card__traits--heading">Select which ship you would like to buy:</p>}
         {viewShipButton &&
           location?.traits.map((trait) => (
-            <p className="traits__trait">
+            <p key={trait.name} className="traits__trait">
               <span className="traits__trait--bold">{trait.name}:</span>{" "}
               {trait.description}
             </p>
