@@ -12,11 +12,10 @@ type ShipButtonProps = {
 
 };
 const ShipButton = ({ setSuccessfullyBoughtShip, ship, location, token, setShipInThisLocation, setAgentAndShipDetails }: ShipButtonProps) => {
-  const splitShipType = ship.type.split("_");
-  const connectedShipName = splitShipType.join(" ");
+  const splitShipType: string[] = ship.type.split("_");
+  const connectedShipName: string = splitShipType.join(" ");
 
   const selectChosenShip = async() => {
-
     if (location != undefined) {
         const resp = await fetch("https://api.spacetraders.io/v2/my/ships", {
           method: "POST",

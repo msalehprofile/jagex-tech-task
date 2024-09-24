@@ -145,7 +145,6 @@ function App() {
 
   useEffect(() => {
     if (agentDetails != undefined && system != undefined) {
-
       getStartingWaypoint();
       findAShipyard();
     }
