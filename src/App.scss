@@ -24,6 +24,7 @@ button {
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
+  color: $light-black-color;
   font-weight: 500;
   font-family: inherit;
   background-color: $white-color;
@@ -42,8 +43,8 @@ button:focus-visible {
   background-color: $logo-color;
   width: 100%;
   text-align: center;
-  padding-top: 5vh;
-  height: 10vh;
+  padding-top: 4vh;
+  height: 12vh;
   font-weight: bolder;
 }
 

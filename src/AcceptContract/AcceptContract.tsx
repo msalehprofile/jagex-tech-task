@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AgentContract } from "../DataTypes/DataTypes";
 import "./AcceptContract.scss";
+import { AgentContract } from "../DataTypes/DataTypes";
 import { useNavigate } from "react-router-dom";
 
 type AcceptContractProps = {
@@ -9,13 +9,20 @@ type AcceptContractProps = {
   findAShipyard: () => void;
 };
 
-const AcceptContract = ({ agentContract, token, findAShipyard }: AcceptContractProps) => {
+const AcceptContract = ({
+  agentContract,
+  token,
+  findAShipyard,
+}: AcceptContractProps) => {
   const today = new Date();
   const todayDate = today.getDate();
   const todayMonth = today.getMonth();
   const todayYear = today.getFullYear();
   const [passedDeadline, setPassedDeadline] = useState<boolean>(false);
   const navigate = useNavigate();
+  const itemToCollect = agentContract
+    ? agentContract.terms.deliver[0].tradeSymbol.replace("_", " ")
+    : "";
 
   const validateAcceptance = () => {
     const refactoredAgentContractAcceptanceDeadline = agentContract
@@ -65,34 +72,57 @@ const AcceptContract = ({ agentContract, token, findAShipyard }: AcceptContractP
 
       if (resp.ok) {
         navigate("/buyaship");
-        findAShipyard()
+        findAShipyard();
       }
     }
   };
 
+  const navigateToHomePage = () => {
+    navigate("/")
+  }
+
   return (
-    <>
-      <h1>Agent, would you like to accept this contract?</h1>
-      <p>Type of contract: {agentContract ? agentContract.type : ""}</p>
-      <p>
-        Your task is to collect{" "}
-        {agentContract ? agentContract.terms.deliver[0].unitsRequired : 0} units
-        of{" "}
-        {agentContract
-          ? agentContract.terms.deliver[0].tradeSymbol.split("-").join(" ")
-          : ""}{" "}
-        before {agentContract ? agentContract.terms.deadline.slice(0, 10) : ""}
-      </p>
-      <p>
-        Please accent this contract by{" "}
-        {agentContract ? agentContract.deadlineToAccept.slice(0, 10) : ""}{" "}
-      </p>
-      <button onClick={validateAcceptance}>Yes</button>
-      <button>No</button>
-      {passedDeadline && (
-        <p>Sorry, the deadline to accept this contract has passed</p>
-      )}
-    </>
+    <div className="acceptcontract">
+      <div className="acceptcontract__form">
+        <h1 className="form__heading">
+          Agent, would you like to accept this contract?
+        </h1>
+        <p className="form__details">
+          <span className="form__details--bold">Type of contract:</span>{" "}
+          {agentContract
+            ? agentContract.type[0] +
+              agentContract.type.slice(1).toLocaleLowerCase()
+            : ""}
+        </p>
+        <p className="form__details">
+          Your task is to collect{" "}
+          {agentContract ? agentContract.terms.deliver[0].unitsRequired : 0}{" "}
+          units of <span className="form__details--bold">{itemToCollect} </span>
+          before{" "}
+          <span className="form__details--bold">
+            {agentContract ? agentContract.terms.deadline.slice(0, 10) : ""}
+          </span>
+        </p>
+        <p className="form__details">
+          Please accent this contract by{" "}
+          <span className="form__details--bold">
+            {agentContract ? agentContract.deadlineToAccept.slice(0, 10) : ""}{" "}
+          </span>
+        </p>
+        <div className="acceptcontract__response">
+          <button
+            className="acceptcontract__response--button"
+            onClick={validateAcceptance}
+          >
+            Yes
+          </button>
+          <button onClick={navigateToHomePage}className="acceptcontract__response--button">No</button>
+        </div>
+        {passedDeadline && (
+          <p>Sorry, the deadline to accept this contract has passed</p>
+        )}
+      </div>
+    </div>
   );
 };
 
